@@ -7,6 +7,7 @@ import com.gabriel.agendador.service.TarefaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,11 @@ public class TarefaController {
         List <Tarefa> tarefas = tarefaService.buscarTodasTarefas();
         return ResponseEntity.ok(tarefas);
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity <Tarefa> buscarTaregaPorId(@PathVariable Long id){
+        return tarefaService.buscarTarefaPorId(id)
+                .map(ResponseEntity::ok) //se encontrar retorne 200 ok + json
+                .orElseGet(()->ResponseEntity.notFound().build()); //se não, retorna 404
+    }
 
 }
