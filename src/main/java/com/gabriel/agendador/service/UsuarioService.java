@@ -5,6 +5,7 @@ import com.gabriel.agendador.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -14,12 +15,12 @@ public class UsuarioService {
     }
     //GET
 
-    public List<Usuario> listarTodos(){
+    public List<Usuario> listarTodosUsuarios(){
         return usuarioRepository.findAll();
     }
 
     //GET ID
-    public Usuario buscarPorId(Long id){
+    public Optional<Usuario> buscarPorId(Long id){
         return usuarioRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Usuario não encontrado"));
 

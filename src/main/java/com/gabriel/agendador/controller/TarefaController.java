@@ -20,9 +20,9 @@ public class TarefaController {
 
     @GetMapping
     public ResponseEntity<List<Tarefa>> buscarTodasTarefas() {
-        List<Tarefa> tarefas = tarefaService.buscarTodasTarefas();
-        return ResponseEntity.ok(tarefas);
+        return ResponseEntity.ok(tarefaService.buscarTodasTarefas());
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
