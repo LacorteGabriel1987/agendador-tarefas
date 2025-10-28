@@ -20,7 +20,7 @@ public class UsuarioService {
     }
 
     //GET ID
-    public Optional<Usuario> buscarPorId(Long id){
+    public Usuario buscarPorId(Long id){
         return usuarioRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Usuario não encontrado"));
 

@@ -22,10 +22,10 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id) {
-        return usuarioService.buscarPorId(id)
-                .map(ResponseEntity::ok) // se encontrar, retorna 200 OK + JSON
-                .orElseGet(() -> ResponseEntity.notFound().build()); // se não, retorna 404
+        Usuario usuario = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuario);
     }
+
     @PostMapping
     public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario){
         Usuario novoUsuario = usuarioService.salvarUsuario(usuario);

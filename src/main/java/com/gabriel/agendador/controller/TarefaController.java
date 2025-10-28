@@ -26,14 +26,14 @@ public class TarefaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
-        return tarefaService.buscarTarefaPorId(id)
-                .map(ResponseEntity::ok) //se encontrar retorne 200 ok + json
-                .orElseGet(() -> ResponseEntity.notFound().build()); //se não, retorna 404
+        Tarefa tarefa = tarefaService.buscarTarefaPorId(id);
+        return ResponseEntity.ok(tarefa);
     }
+
 
     @PostMapping
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody Tarefa tarefa){
-        Tarefa novaTarefa = tarefaService.salvarTarefa();
+        Tarefa novaTarefa = tarefaService.salvarTarefa(tarefa);
         return ResponseEntity.status(201).body(novaTarefa); // 201 Created + retorna a tarefa criada
     }
 

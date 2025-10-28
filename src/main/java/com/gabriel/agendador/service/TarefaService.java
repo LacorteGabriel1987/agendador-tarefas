@@ -1,6 +1,7 @@
 package com.gabriel.agendador.service;
 
 import com.gabriel.agendador.entity.Tarefa;
+import com.gabriel.agendador.exception.TarefaNotFoundException;
 import com.gabriel.agendador.repository.TarefaRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class TarefaService {
     }
 
     //Get buscar por id
-    public Optional<Tarefa> buscarTarefaPorId(Long id) {
-        return tarefaRepository.findById(id);
+    public Tarefa buscarTarefaPorId(Long id) {
+        return tarefaRepository.findById(id)
+                .orElseThrow(()-> new TarefaNotFoundException("Tarefa não encontrada " + id));
     }
 
     //Post
